@@ -1,5 +1,9 @@
 package mob;
 
-public class Player {
+public class Player extends Entity{
+	
+	public Player(){
+		canCollide=true;
+	}
 
 }

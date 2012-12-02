@@ -16,7 +16,7 @@ public class Frame extends JFrame implements KeyListener {
 	Image dbImage;
 	Graphics dbg;
 	
-	public static final int SPEED=8;
+	public static final int SPEED=4;
 	public double VERSION=0.01;
 	public static int WIDTH=1028,HEIGHT=576;
 	public static int SCALE=8;

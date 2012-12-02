@@ -15,9 +15,10 @@ public class Block {
 	public int imgx,imgy,imgx1,imgy1;
 	public static final int WIDTH=8,HEIGHT=8;
 	public int finalw,finalh;
-	public int ID;	
+	public int ID;
+	Tile t;
 	public Block(){
-		
+		t=new Tile();
 	}
 	
 	public void workINTS(){
@@ -30,6 +31,8 @@ public class Block {
 		finaly=y*def.Frame.SCALE;
 		finalw=WIDTH*def.Frame.SCALE;
 		finalh=HEIGHT*def.Frame.SCALE;
+		t.setSize(finalw,finalh);
+		t.setLocation(finalx+Engine.cam.xOffset, finaly+Engine.cam.yOffset);
 	}
 	
 	public void runBlock(Graphics g){
