@@ -15,8 +15,8 @@ public class WorldFileHandler {
 	File world = new File("res/world01.thu");
 	FileWriter fw;
 	boolean hasWorld;
-	int thisWorldWIDTH=32;
-	int thisWorldHEIGHT=32;
+	int thisWorldWIDTH=128;
+	int thisWorldHEIGHT=128;
 	Scanner ws;
 	
 	public WorldFileHandler(){
