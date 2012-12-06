@@ -5,8 +5,13 @@ public class Camera {
 	public int xOffset,yOffset;
 	public static int UP=1,DOWN=2,LEFT=3,RIGHT=4;
 	
-	public Camera(){
-		
+	public Camera(int x,int y){
+		setXY(x,y);
+	}
+	
+	public void setXY(int x, int y){
+		xOffset=x;
+		yOffset=y;
 	}
 	
 	public void move(int dir){
