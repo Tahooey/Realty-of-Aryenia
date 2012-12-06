@@ -16,7 +16,7 @@ public class Frame extends JFrame implements KeyListener {
 	Image dbImage;
 	Graphics dbg;
 	
-	public static final int SPEED=4;
+	public static final int SPEED=8;
 	public double VERSION=0.01;
 	public static int WIDTH=1028,HEIGHT=576;
 	public static int SCALE=8;
@@ -33,6 +33,12 @@ public class Frame extends JFrame implements KeyListener {
 		setBackground(Color.black);
 		addKeyListener(this);
 		
+		try {
+			ImageHandler.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		setVisible(true);
 	}
 	
@@ -42,11 +48,6 @@ public class Frame extends JFrame implements KeyListener {
 		
 		if(RUNNING){
 			repaint();
-		}
-		try {
-			ImageHandler.load();
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 	
