@@ -6,7 +6,7 @@ public class Tile {
 	
 	int x,y;
 	int w,h;
-	Rectangle r;
+	public Rectangle r;
 	
 	public Tile(){
 		r = new Rectangle();
@@ -15,10 +15,10 @@ public class Tile {
 	public void runTile(Graphics g){
 		r.setSize(w,h);
 		r.setLocation(x,y);
-		g.drawRect(r.x, r.y, r.width, r.height);
+		//g.drawRect(r.x, r.y, r.width, r.height);
 	}
 	public boolean isIntersecting(Rectangle r){
-		return r.intersects(this.r);
+		return this.r.intersects(r);
 	}
 	public void setSize(int w,int h){
 		this.w=w;
