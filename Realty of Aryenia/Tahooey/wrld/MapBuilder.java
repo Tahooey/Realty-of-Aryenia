@@ -1,7 +1,6 @@
 package wrld;
 
-import mob.Entity;
-import mob.Player;
+import mob.*;
 import blck.*;
 import def.*;
 import til.*;
@@ -15,7 +14,7 @@ public class MapBuilder {
 	public MapBuilder(){
 		LowerBLOCKS = new Block[Engine.fh.ReadWorldWIDTH][Engine.fh.ReadWorldHEIGHT];
 		HigherBLOCKS = new Block[Engine.fh.ReadWorldWIDTH][Engine.fh.ReadWorldHEIGHT];
-		ENTITIES = new Entity[1];
+		ENTITIES = new Entity[2];
 		createENTITIES();
 		setUpTypeArray();
 		workBlocks();
@@ -27,7 +26,10 @@ public class MapBuilder {
 	}
 	
 	public void createENTITIES(){
-		ENTITIES[0]= new Player(); 
+		ENTITIES[0]= new Player(8,8);
+		ENTITIES[0].isControlledByPlayer=true;
+		ENTITIES[0].isFollowedByCamera=true;
+		ENTITIES[1]=new Wizard(64,64);
 	}
 	
 	public void workBlocks(){
