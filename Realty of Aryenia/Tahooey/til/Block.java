@@ -10,6 +10,9 @@ import mob.Entity;
 import def.Engine;
 
 public class Block {
+	
+	public static boolean canLetMove;
+	
 	public boolean isHigh;
 	public BufferedImage IMG_TO_READ;
 	public int finalx,finaly;
@@ -42,36 +45,30 @@ public class Block {
 		if(isCollidable){
 			for(int i=0;i<Engine.mb.ENTITIES.length;i++){
 				if(Engine.mb.ENTITIES[i].currentLayer==layer){
-					if(Engine.mb.ENTITIES[i].dir==Entity.RIGHT){
-						Engine.mb.ENTITIES[i].canMoveLeft=true;
-						Engine.mb.ENTITIES[i].canMoveUp=true;
-						Engine.mb.ENTITIES[i].canMoveDown=true;
-						if(Engine.mb.ENTITIES[i].t.isIntersecting(t.r)){
-							Engine.mb.ENTITIES[i].canMoveRight=false;
-						}
-					}
-					if(Engine.mb.ENTITIES[i].dir==Entity.LEFT){
-						Engine.mb.ENTITIES[i].canMoveRight=true;
-						Engine.mb.ENTITIES[i].canMoveUp=true;
-						Engine.mb.ENTITIES[i].canMoveDown=true;
-						if(Engine.mb.ENTITIES[i].t.isIntersecting(t.r)){
-							Engine.mb.ENTITIES[i].canMoveLeft=false;
-						}						
-					}
-					if(Engine.mb.ENTITIES[i].dir==Entity.UP){
-						Engine.mb.ENTITIES[i].canMoveDown=true;
-						Engine.mb.ENTITIES[i].canMoveLeft=true;
-						Engine.mb.ENTITIES[i].canMoveRight=true;	
-						if(Engine.mb.ENTITIES[i].t.isIntersecting(t.r)){
-							Engine.mb.ENTITIES[i].canMoveUp=false;						
-						}
-					}
-					if(Engine.mb.ENTITIES[i].dir==Entity.DOWN){
-						Engine.mb.ENTITIES[i].canMoveUp=true;
-						Engine.mb.ENTITIES[i].canMoveLeft=true;
-						Engine.mb.ENTITIES[i].canMoveRight=true;
-						if(Engine.mb.ENTITIES[i].t.isIntersecting(t.r)){
-							Engine.mb.ENTITIES[i].canMoveDown=false;
+					if(Engine.mb.ENTITIES[i].canCollide){
+						if(t.r.intersects(Engine.mb.ENTITIES[i].t.r)){
+							if(!Engine.mb.ENTITIES[i].canLetMove){
+								Engine.mb.ENTITIES[i].dx=0;
+								Engine.mb.ENTITIES[i].dy=0;	
+							}
+							if(Engine.mb.ENTITIES[i].canLetMove){
+								if(Engine.mb.ENTITIES[i].dir==Entity.UP){
+									Engine.mb.ENTITIES[i].yoffset+=def.Frame.SPEED;
+									Engine.mb.ENTITIES[i].canLetMove=false;
+								}
+								if(Engine.mb.ENTITIES[i].dir==Entity.DOWN){
+									Engine.mb.ENTITIES[i].yoffset-=def.Frame.SPEED;
+									Engine.mb.ENTITIES[i].canLetMove=false;
+								}
+								if(Engine.mb.ENTITIES[i].dir==Entity.LEFT){
+									Engine.mb.ENTITIES[i].xoffset+=def.Frame.SPEED;
+									Engine.mb.ENTITIES[i].canLetMove=false;
+								}
+								if(Engine.mb.ENTITIES[i].dir==Entity.RIGHT){
+									Engine.mb.ENTITIES[i].xoffset+=def.Frame.SPEED;
+									Engine.mb.ENTITIES[i].canLetMove=false;
+								}
+							}
 						}
 					}
 				}
