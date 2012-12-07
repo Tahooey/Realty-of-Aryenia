@@ -14,7 +14,7 @@ public class MapBuilder {
 	public MapBuilder(){
 		LowerBLOCKS = new Block[Engine.fh.ReadWorldWIDTH][Engine.fh.ReadWorldHEIGHT];
 		HigherBLOCKS = new Block[Engine.fh.ReadWorldWIDTH][Engine.fh.ReadWorldHEIGHT];
-		ENTITIES = new Entity[2];
+		ENTITIES = new Entity[10];
 		createENTITIES();
 		setUpTypeArray();
 		workBlocks();
@@ -30,6 +30,14 @@ public class MapBuilder {
 		ENTITIES[0].isControlledByPlayer=true;
 		ENTITIES[0].isFollowedByCamera=true;
 		ENTITIES[1]=new Wizard(64,64);
+		ENTITIES[2]=new Wizard(96,108);
+		ENTITIES[3]=new Wizard(128,53);
+		ENTITIES[4]=new Wizard(69,128);
+		ENTITIES[5]=new Wizard(234,64);
+		ENTITIES[6]=new Wizard(185,36);
+		ENTITIES[7]=new Wizard(58,105);
+		ENTITIES[8]=new Wizard(30,40);
+		ENTITIES[9]=new Wizard(72,86);
 	}
 	
 	public void workBlocks(){
