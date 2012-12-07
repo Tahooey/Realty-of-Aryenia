@@ -5,15 +5,25 @@ import java.awt.*;
 
 import def.Engine;
 
+import til.Block;
 import til.Tile;
 
 public class Entity {
 	
+	public boolean canLetMove;
+	public static boolean canStartAI=true;
 	
+	public int dx=0,dy=0;
+	int currentHealth,maxHealth;
+	public int cur=0;
+	public int tick;
+	Image SHOOT_PARTICLE;
+	public boolean Shoot=false;
+	public boolean isControlledByPlayer=false;
 	public boolean canMoveUp=true,canMoveDown=true,canMoveLeft=true,canMoveRight=true;
 	public int dir;
 	public boolean isFollowedByCamera=false;
-	public static int UP=1,DOWN=2,LEFT=3,RIGHT=4;
+	public static int UP=1,DOWN=2,LEFT=3,RIGHT=4,STILL=5;
 	public int currentLayer;
 	public boolean canCollide;
 	public int x,y;
@@ -35,65 +45,114 @@ public class Entity {
 		t.setLocation(finalx+Engine.cam.xOffset, finaly+Engine.cam.yOffset);
 		drawEntity(g);
 		t.runTile(g);
+		if(!isControlledByPlayer){
+			if(canStartAI){
+				runAI();
+			}			
+		}
+	}
+	
+	public void runAI(){
+		if(cur<256){
+			cur++;
+			if(cur<=32){
+				move(UP);
+			}
+			canLetMove=true;
+			if(cur>=50){
+				if(cur<=60){
+					move(LEFT);
+				}
+			}
+			canLetMove=true;
+			if(cur>=70){
+				if(cur<=100){
+					move(DOWN);
+				}
+			}
+			canLetMove=true;
+			if(cur>=120){
+				if(cur<=145){
+					move(RIGHT);
+				}
+			}
+			canLetMove=true;
+			if(cur>=200){
+				if(cur<=248){
+					move(LEFT);
+				}
+			}
+		}else{
+			cur=0;
+		}
+	}
+	
+	public void setImage(int img){
+		if(img==RIGHT){
+			imgx=0;
+			imgy=0;
+			imgx1=8;
+			imgy1=8;
+		}
+		if(img==LEFT){
+			imgx=8;
+			imgy=0;
+			imgx1=16;
+			imgy1=8;
+		}
+		if(img==UP){
+			imgx=16;
+			imgy=0;
+			imgx1=24;
+			imgy1=8;
+		}
+		if(img==DOWN){
+			imgx=24;
+			imgy=0;
+			imgx1=32;
+			imgy1=8;
+		}
+		
 	}
 	
 	public void move(int direction){
 		dir=direction;
+		setImage(direction);
 		if(direction==UP){
 			if(canMoveUp){
-				if(isFollowedByCamera){
-					Engine.cam.move(UP);
-				}
-				yoffset-=def.Frame.SPEED;
-				imgx=16;
-				imgy=0;
-				imgx1=24;
-				imgy1=8;				
+				dy=-def.Frame.SCALE;
+				dx=0;				
+			}else{
+				dy=0;
 			}
-
 		}
 		if(direction==DOWN){
 			if(canMoveDown){
-				if(isFollowedByCamera){
-					Engine.cam.move(DOWN);
-				}
-				yoffset+=def.Frame.SPEED;
-				imgx=24;
-				imgy=0;
-				imgx1=32;
-				imgy1=8;				
+				dy=def.Frame.SCALE;
+				dx=0;				
+			}else{
+				dy=0;
 			}
-
 		}
 		if(direction==LEFT){
 			if(canMoveLeft){
-				if(isFollowedByCamera){
-					Engine.cam.move(LEFT);
-				}
-				xoffset-=def.Frame.SPEED;
-				imgx=8;
-				imgy=0;
-				imgx1=16;
-				imgy1=8;				
+				dx=-def.Frame.SCALE;
+				dy=0;				
+			}else{
+				dx=0;
 			}
-
 		}
 		if(direction==RIGHT){
 			if(canMoveRight){
-				if(isFollowedByCamera){
-					Engine.cam.move(RIGHT);
-				}
-				xoffset+=def.Frame.SPEED;
-				imgx=0;
-				imgy=0;
-				imgx1=8;
-				imgy1=8;				
+				dx=def.Frame.SCALE;
+				dy=0;				
 			}
-
 		}
 	}
 	
 	public void workINTS(){
+		xoffset=xoffset+dx;
+		yoffset=yoffset+dy;
 		finalx=(x*def.Frame.SCALE)+xoffset;
 		finaly=(y*def.Frame.SCALE)+yoffset;
 		finalw=w*def.Frame.SCALE;
