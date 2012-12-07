@@ -3,13 +3,12 @@ package def;
 import img.ImageHandler;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.io.IOException;
+import java.awt.event.*;
+import java.io.*;
 
 import javax.swing.*;
 
-public class Frame extends JFrame implements KeyListener {
+public class Frame extends JFrame implements KeyListener, MouseMotionListener, MouseListener {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -32,7 +31,8 @@ public class Frame extends JFrame implements KeyListener {
 		setTitle(TITLE);
 		setBackground(Color.black);
 		addKeyListener(this);
-		
+		addMouseMotionListener(this);
+		addMouseListener(this);		
 		try {
 			ImageHandler.load();
 		} catch (IOException e) {
@@ -67,14 +67,53 @@ public class Frame extends JFrame implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
-		
+		Engine.KeyReleased(arg0);
 	}
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		
 	}
-	
-	
+
+	@Override
+	public void mouseDragged(java.awt.event.MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(java.awt.event.MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseClicked(java.awt.event.MouseEvent arg0) {
+		
+	}
+
+	@Override
+	public void mouseEntered(java.awt.event.MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(java.awt.event.MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(java.awt.event.MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(java.awt.event.MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}	
 
 }
