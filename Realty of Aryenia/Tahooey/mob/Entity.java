@@ -2,17 +2,18 @@ package mob;
 
 
 import java.awt.*;
+import java.util.Random;
 
 import def.Engine;
-
-import til.Block;
 import til.Tile;
 
 public class Entity {
 	
 	public boolean canLetMove;
-	public static boolean canStartAI=true;
+	public static boolean canStartAI=false;
 	
+	public boolean changingX=false,changingY=false;
+	Random r = new Random();
 	public int dx=0,dy=0;
 	int currentHealth,maxHealth;
 	public int cur=0;
@@ -53,35 +54,36 @@ public class Entity {
 	}
 	
 	public void runAI(){
-		if(cur<256){
+		int dire=0;
+		if(cur<=100){
+			canLetMove=true;
+			changingX=false;
+			changingY=false;
+			if(cur>=0){
+				if(cur==0){
+					dire=r.nextInt(6-1)+1;
+				}
+				if(cur<=75){
+					canLetMove=false;
+					if(dire==1){
+						move(UP);	
+					}else if(dire==2){
+						move(DOWN);	
+					}else if(dire==3){
+						move(LEFT);	
+					}else if(dire==4){
+						move(RIGHT);	
+					}else if(dire==5){
+						dx=0;
+						dy=0;
+					}
+				}
+				if(cur==75+1){
+					dx=0;
+					dy=0;
+				}
+			}
 			cur++;
-			if(cur<=32){
-				move(UP);
-			}
-			canLetMove=true;
-			if(cur>=50){
-				if(cur<=60){
-					move(LEFT);
-				}
-			}
-			canLetMove=true;
-			if(cur>=70){
-				if(cur<=100){
-					move(DOWN);
-				}
-			}
-			canLetMove=true;
-			if(cur>=120){
-				if(cur<=145){
-					move(RIGHT);
-				}
-			}
-			canLetMove=true;
-			if(cur>=200){
-				if(cur<=248){
-					move(LEFT);
-				}
-			}
 		}else{
 			cur=0;
 		}
@@ -116,38 +118,58 @@ public class Entity {
 	}
 	
 	public void move(int direction){
-		dir=direction;
-		setImage(direction);
-		if(direction==UP){
-			if(canMoveUp){
-				dy=-def.Frame.SCALE;
-				dx=0;				
-			}else{
-				dy=0;
+			if(direction==UP){
+				changingY=true;
+				if(!changingX){
+					dir=direction;
+					setImage(direction);
+					if(canMoveUp){
+						dy=-def.Frame.SCALE;
+						dx=0;				
+					}else{
+						dy=0;
+					}
+				}
 			}
-		}
-		if(direction==DOWN){
-			if(canMoveDown){
-				dy=def.Frame.SCALE;
-				dx=0;				
-			}else{
-				dy=0;
+			if(direction==DOWN){
+				changingY=true;
+				if(!changingX){
+					dir=direction;
+					setImage(direction);
+					if(canMoveDown){
+						dy=def.Frame.SCALE;
+						dx=0;				
+					}else{
+						dy=0;
+					}
+				}
 			}
-		}
-		if(direction==LEFT){
-			if(canMoveLeft){
-				dx=-def.Frame.SCALE;
-				dy=0;				
-			}else{
-				dx=0;
+			if(direction==LEFT){
+				changingX=true;
+				if(!changingY){
+					dir=direction;
+					setImage(direction);
+					if(canMoveLeft){
+						dx=-def.Frame.SCALE;
+						dy=0;				
+					}else{
+						dx=0;
+					}
+				}
 			}
-		}
-		if(direction==RIGHT){
-			if(canMoveRight){
-				dx=def.Frame.SCALE;
-				dy=0;				
-			}
-		}
+			if(direction==RIGHT){
+				changingX=true;
+				if(!changingY){
+					dir=direction;
+					setImage(direction);
+					if(canMoveRight){
+						dx=def.Frame.SCALE;
+						dy=0;				
+					}else{
+						dx=0;
+					}
+				}
+			}			
 	}
 	
 	public void workINTS(){
@@ -160,7 +182,17 @@ public class Entity {
 	}
 	
 	public void drawEntity(Graphics g){
-		g.drawImage(IMG_TO_DRAW, finalx+Engine.cam.xOffset, finaly+Engine.cam.yOffset, finalx+finalw+Engine.cam.xOffset, finaly+finalh+Engine.cam.yOffset, imgx, imgy, imgx1, imgy1, null);
+		if(finalx+Engine.cam.xOffset>=0-finalw){
+			if(finalx+Engine.cam.xOffset<=def.Frame.WIDTH){
+				if(finaly+Engine.cam.yOffset>=0-finalh){
+					if(finaly+Engine.cam.yOffset<=def.Frame.HEIGHT){
+						g.drawImage(IMG_TO_DRAW, finalx+Engine.cam.xOffset, finaly+Engine.cam.yOffset, finalx+finalw+Engine.cam.xOffset, finaly+finalh+Engine.cam.yOffset, imgx, imgy, imgx1, imgy1, null);
+						canStartAI=true;
+					}
+				}
+			}
+		}
+		
 	}
 
 }
