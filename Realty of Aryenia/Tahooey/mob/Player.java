@@ -4,11 +4,11 @@ import img.ImageHandler;
 
 public class Player extends Entity{
 	
-	public Player(){
-		isFollowedByCamera=true;
+	public Player(int xco,int yco){
+		SHOOT_PARTICLE=ImageHandler.PlayerFire;
 		canCollide=true;
-		x=8;
-		y=8;
+		x=xco;
+		y=yco;
 		IMG_TO_DRAW=ImageHandler.Player;
 		currentLayer=2;
 	}
