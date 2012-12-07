@@ -52,6 +52,7 @@ public class Block {
 								Engine.mb.ENTITIES[i].dy=0;	
 							}
 							if(Engine.mb.ENTITIES[i].canLetMove){
+								System.out.println(Engine.mb.ENTITIES[i].dir);
 								if(Engine.mb.ENTITIES[i].dir==Entity.UP){
 									Engine.mb.ENTITIES[i].yoffset+=def.Frame.SPEED;
 									Engine.mb.ENTITIES[i].canLetMove=false;
