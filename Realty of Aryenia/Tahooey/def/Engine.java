@@ -36,10 +36,6 @@ public class Engine {
 				}				
 			}
 		}
-		
-		if(KeyCode==KeyEvent.VK_P){
-			Entity.canStartAI=true;
-		}
 
 	}
 	public static void KeyReleased(KeyEvent e){
@@ -47,6 +43,8 @@ public class Engine {
 		
 		for(int i=0;i<mb.ENTITIES.length;i++){
 			if(mb.ENTITIES[i].isControlledByPlayer){
+				mb.ENTITIES[i].changingX=false;
+				mb.ENTITIES[i].changingY=false;
 				if(KeyCode==KeyEvent.VK_W){
 					mb.ENTITIES[i].dy=0;
 				}
