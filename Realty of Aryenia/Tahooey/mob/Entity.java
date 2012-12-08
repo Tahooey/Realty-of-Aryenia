@@ -12,6 +12,8 @@ public class Entity {
 	public boolean canLetMove;
 	public static boolean canStartAI=false;
 	
+	public String mobName;
+	
 	public boolean changingX=false,changingY=false;
 	Random r = new Random();
 	public int dx=0,dy=0;
