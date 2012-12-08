@@ -12,9 +12,9 @@ public class Camera {
 	
 	public void move(){
 		for(int i=0;i<Engine.mb.ENTITIES.length;i++){
-			if(Engine.mb.ENTITIES[i].isFollowedByCamera){
-				xOffset=(Engine.mb.ENTITIES[i].xoffset*-1)+400;
-				yOffset=(Engine.mb.ENTITIES[i].yoffset*-1)+200;				
+			if(Engine.mb.ENTITIES[0].isFollowedByCamera){
+				xOffset=(Engine.mb.ENTITIES[0].xoffset*-1)+400;
+				yOffset=(Engine.mb.ENTITIES[0].yoffset*-1)+200;				
 			}
 		}
 	}
