@@ -57,13 +57,13 @@ public class WorldFileHandler {
 		fw.write(" "+ReadWorldWIDTH+" "+ReadWorldHEIGHT+" ");
 		for(int i=0;i<Engine.mb.LowerBLOCKS.length;i++){
 			for(int j=0;j<Engine.mb.LowerBLOCKS[i].length;j++){
-				fw.write(Engine.mb.LowerBLOCKS[i][j].ID+" ");
+				fw.write(Engine.mb.LowerBLOCKS[j][i].ID+" ");
 			}
 		}
 		fw.write("~ ");
 		for(int i=0;i<Engine.mb.HigherBLOCKS.length;i++){
 			for(int j=0;j<Engine.mb.HigherBLOCKS[i].length;j++){
-				fw.write(Engine.mb.HigherBLOCKS[i][j].ID+" ");
+				fw.write(Engine.mb.HigherBLOCKS[j][i].ID+" ");
 			}
 		}
 		fw.flush();
