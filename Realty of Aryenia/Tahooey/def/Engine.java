@@ -3,23 +3,38 @@ package def;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 import mob.*;
 import wrld.*;
 
 public class Engine {
 	
+	
+	public static boolean inEditMode=false;
 	public static boolean canPressKey=true;
 	public static MobFileHandler mfh = new MobFileHandler();
 	public static WorldFileHandler fh = new WorldFileHandler();	
+	public static PlayerFileHandler pfh = new PlayerFileHandler();	
 	public static MapBuilder mb = new MapBuilder();
 	public static Camera cam = new Camera();
 	public static void RunGame(Graphics g){
 		WorldRunner.RunWorld(g);
 		cam.move();
+		Mouse.runMouse(g);
 	}
+	
+	public static void MouseMoved(MouseEvent e){
+		int mouseX=e.getX();
+		int mouseY=e.getY();
+		
+		Mouse.x=mouseX;
+		Mouse.y=mouseY;
+	}
+	
 	public static void KeyPressed(KeyEvent e){
 		int KeyCode = e.getKeyCode();
+		Mouse.KeyPressed(e);
 		for(int i=0;i<mb.ENTITIES.length;i++){
 			if(mb.ENTITIES[i].isControlledByPlayer){
 				if(canPressKey){
@@ -40,8 +55,27 @@ public class Engine {
 						canPressKey=false;
 					}						
 				}
-			
 			}
+		}
+		if(KeyCode==KeyEvent.VK_P){
+			try {
+				pfh.save();
+				fh.SaveWorld();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
+		if(KeyCode==KeyEvent.VK_UP){
+			Mouse.curlayer=2;
+		}
+		if(KeyCode==KeyEvent.VK_DOWN){
+			Mouse.curlayer=1;
+		}
+		if(KeyCode==KeyEvent.VK_E){
+			inEditMode=true;
+		}
+		if(KeyCode==KeyEvent.VK_R){
+			inEditMode=false;
 		}
 
 	}
@@ -71,6 +105,12 @@ public class Engine {
 
 	}
 	public static void MousePressed(MouseEvent e){
+		Mouse.hasClicked=true;
+		Mouse.hasReleased=false;
+	}
+	public static void MouseReleased(MouseEvent e){
+		Mouse.hasReleased=true;
+		Mouse.hasClicked=false;
 	}
 
 }
