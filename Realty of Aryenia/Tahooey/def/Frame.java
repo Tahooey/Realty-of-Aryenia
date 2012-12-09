@@ -17,7 +17,7 @@ public class Frame extends JFrame implements KeyListener, MouseMotionListener, M
 	Graphics dbg;
 	
 	public static final int SPEED=8;
-	public double VERSION=0.07;
+	public double VERSION=0.081;
 	public static int WIDTH=1028,HEIGHT=576;
 	public static int SCALE=8;
 	public boolean RUNNING=true;
