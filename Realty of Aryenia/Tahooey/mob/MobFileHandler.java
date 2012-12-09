@@ -8,6 +8,7 @@ public class MobFileHandler {
 	public String[] WrittenEntitiesName;
 	public int[] WrittenEntitiesX;
 	public int[] WrittenEntitiesY;
+	public String[] WrittenEntitiesShownName;
 	
 	Random r = new Random();
 	
@@ -15,6 +16,7 @@ public class MobFileHandler {
 	public String[] ReadEntitiesName;
 	public int[] ReadEntitiesX;
 	public int[] ReadEntitiesY;
+	public String[] ReadEntitiesShownName;
 	
 	Player p=new Player(0,0,0);
 	Wizard w=new Wizard(0,0,0);
@@ -54,9 +56,19 @@ public class MobFileHandler {
 	
 	public void GenerateWrittenMobs(){
 		for(int i=0;i<WrittenTotalEntities;i++){
-			WrittenEntitiesName[i]=w.mobName;
+			int mobName=r.nextInt(3-1)+1;
+			if(mobName==1){
+				WrittenEntitiesName[i]=w.mobName;
+			}else if(mobName==2){
+				WrittenEntitiesName[i]=p.mobName;
+			}else{
+				System.out.println("ERROR");
+				WrittenEntitiesName[i]=p.mobName;
+			}
+			
 			WrittenEntitiesX[i]=r.nextInt((100*def.Frame.SCALE)-9)+9;
 			WrittenEntitiesY[i]=r.nextInt((100*def.Frame.SCALE)-9)+9;
+			
 		}
 	}
 	
