@@ -3,6 +3,8 @@ package wrld;
 import java.io.*;
 import java.util.*;
 
+import def.Engine;
+
 public class WorldFileHandler {
 	
 	String WorldName;
@@ -42,6 +44,30 @@ public class WorldFileHandler {
 		INTSlay1= new int[ReadWorldWIDTH] [ReadWorldHEIGHT];
 		INTSlay2= new int[ReadWorldWIDTH] [ReadWorldHEIGHT];
 		readWorldData();
+	}
+	
+	public void SaveWorld() throws IOException{
+		try {
+			fw = new FileWriter(world);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		fw.write("World1 ");
+		fw.write(" "+ReadWorldWIDTH+" "+ReadWorldHEIGHT+" ");
+		for(int i=0;i<Engine.mb.LowerBLOCKS.length;i++){
+			for(int j=0;j<Engine.mb.LowerBLOCKS[i].length;j++){
+				fw.write(Engine.mb.LowerBLOCKS[i][j].ID+" ");
+			}
+		}
+		fw.write("~ ");
+		for(int i=0;i<Engine.mb.HigherBLOCKS.length;i++){
+			for(int j=0;j<Engine.mb.HigherBLOCKS[i].length;j++){
+				fw.write(Engine.mb.HigherBLOCKS[i][j].ID+" ");
+			}
+		}
+		fw.flush();
+		fw.close();
 	}
 	
 	public void WriteWorld() throws IOException{
