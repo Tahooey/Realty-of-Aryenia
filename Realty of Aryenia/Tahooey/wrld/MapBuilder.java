@@ -29,13 +29,30 @@ public class MapBuilder {
 	}
 	
 	public void createENTITIES(){
-		ENTITIES[0]= new Player(8,8,2);
+		
+		if(Engine.pfh.PlayerReadMob.equals(p.mobName)){
+			ENTITIES[0]= new Player(Engine.pfh.PlayerReadX,Engine.pfh.PlayerReadY,2);
+		}else if(Engine.pfh.PlayerReadMob.equals(w.mobName)){
+			ENTITIES[0]= new Wizard(Engine.pfh.PlayerReadX,Engine.pfh.PlayerReadY,2);
+		}else{
+			ENTITIES[0]= new Player(Engine.pfh.PlayerReadX,Engine.pfh.PlayerReadY,2);
+		}
+		ENTITIES[0].mobName=Engine.pfh.PlayerReadMob;
+		ENTITIES[0].xoffset=Engine.pfh.PlayerReadXOff;
+		ENTITIES[0].yoffset=Engine.pfh.PlayerReadYOff;
+		ENTITIES[0].maxHealth=Engine.pfh.PlayerReadMaxHealth;
+		ENTITIES[0].currentHealth=Engine.pfh.PlayerReadCurHealth;
+		ENTITIES[0].name=Engine.pfh.PlayerReadName;
 		ENTITIES[0].isControlledByPlayer=true;
 		ENTITIES[0].isFollowedByCamera=true;
 		for(int i=0;i<ENTITIES.length-1;i++){
 			if(Engine.mfh.ReadEntitiesName[i].equals(w.mobName)){
 				ENTITIES[i+1]=new Wizard(Engine.mfh.ReadEntitiesX[i],Engine.mfh.ReadEntitiesY[i],2);
-				
+				ENTITIES[i+1].name="AI";
+			}
+			if(Engine.mfh.ReadEntitiesName[i].equals(p.mobName)){
+				ENTITIES[i+1]=new Player(Engine.mfh.ReadEntitiesX[i],Engine.mfh.ReadEntitiesY[i],2);
+				ENTITIES[i+1].name="AI";
 			}
 		}
 		
