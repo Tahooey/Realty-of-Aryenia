@@ -13,6 +13,8 @@ public class Block {
 	
 	public static boolean canLetMove;
 	
+	public boolean isIntersectedByMouse=false;
+	
 	public boolean isHigh;
 	public BufferedImage IMG_TO_READ;
 	public int finalx,finaly;
@@ -24,7 +26,7 @@ public class Block {
 	public boolean isCollidable=true;
 	
 	public int layer;
-	Tile t = new Tile();
+	public Tile t = new Tile();
 	public Block(){
 	
 	}
@@ -90,11 +92,15 @@ public class Block {
 			if(finalx+Engine.cam.xOffset<=def.Frame.WIDTH){
 				if(finaly+Engine.cam.yOffset>=0-finalh){
 					if(finalh+Engine.cam.yOffset<=def.Frame.HEIGHT);
+					g.drawImage(IMG_TO_READ, finalx+Engine.cam.xOffset, finaly+Engine.cam.yOffset, finalx+finalw+Engine.cam.xOffset, finaly+finalh+Engine.cam.yOffset, imgx, imgy, imgx1, imgy1, null);
+					if(isIntersectedByMouse){
+						if(Engine.inEditMode){
+							g.drawRect(finalx+Engine.cam.xOffset, finaly+Engine.cam.yOffset, finalw-1, finalh-1);
+						}						
+					}
 				}
 			}
-		}
-		g.drawImage(IMG_TO_READ, finalx+Engine.cam.xOffset, finaly+Engine.cam.yOffset, finalx+finalw+Engine.cam.xOffset, finaly+finalh+Engine.cam.yOffset, imgx, imgy, imgx1, imgy1, null);
-		
+		}		
 	}
 
 }
