@@ -4,6 +4,8 @@ import img.ImageHandler;
 
 public class Player extends Entity{
 	
+	public String name;
+	
 	public Player(int xco,int yco,int layer){
 		mobName="Player";
 		SHOOT_PARTICLE=ImageHandler.PlayerFire;
