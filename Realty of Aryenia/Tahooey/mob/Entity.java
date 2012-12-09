@@ -1,6 +1,8 @@
 package mob;
 
 
+import img.FontLoader;
+
 import java.awt.*;
 import java.util.Random;
 
@@ -14,10 +16,12 @@ public class Entity {
 	
 	public String mobName;
 	
+	public String name;
+	
 	public boolean changingX=false,changingY=false;
 	Random r = new Random();
 	public int dx=0,dy=0;
-	int currentHealth,maxHealth;
+	public int currentHealth=100,maxHealth=100;
 	public int cur=0;
 	public int tick;
 	Image SHOOT_PARTICLE;
@@ -188,6 +192,8 @@ public class Entity {
 			if(finalx+Engine.cam.xOffset<=def.Frame.WIDTH){
 				if(finaly+Engine.cam.yOffset>=0-finalh){
 					if(finaly+Engine.cam.yOffset<=def.Frame.HEIGHT){
+						g.setFont(FontLoader.Tahooey);
+						g.drawString(name, (finalx+Engine.cam.xOffset), (finaly+Engine.cam.yOffset)-5);
 						g.drawImage(IMG_TO_DRAW, finalx+Engine.cam.xOffset, finaly+Engine.cam.yOffset, finalx+finalw+Engine.cam.xOffset, finaly+finalh+Engine.cam.yOffset, imgx, imgy, imgx1, imgy1, null);
 						canStartAI=true;
 					}
