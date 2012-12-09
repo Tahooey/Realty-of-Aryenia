@@ -1,5 +1,6 @@
 package def;
 
+import img.FontLoader;
 import img.ImageHandler;
 
 import java.awt.*;
@@ -35,7 +36,11 @@ public class Frame extends JFrame implements KeyListener, MouseMotionListener, M
 		addMouseListener(this);		
 		try {
 			ImageHandler.load();
+			FontLoader.loadFont();
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (FontFormatException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -77,14 +82,12 @@ public class Frame extends JFrame implements KeyListener, MouseMotionListener, M
 
 	@Override
 	public void mouseDragged(java.awt.event.MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		Engine.MouseMoved(e);
 	}
 
 	@Override
 	public void mouseMoved(java.awt.event.MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		Engine.MouseMoved(e);
 	}
 
 	@Override
@@ -94,7 +97,6 @@ public class Frame extends JFrame implements KeyListener, MouseMotionListener, M
 
 	@Override
 	public void mouseEntered(java.awt.event.MouseEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -106,13 +108,13 @@ public class Frame extends JFrame implements KeyListener, MouseMotionListener, M
 
 	@Override
 	public void mousePressed(java.awt.event.MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		Engine.MousePressed(arg0);
 		
 	}
 
 	@Override
 	public void mouseReleased(java.awt.event.MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		Engine.MouseReleased(arg0);
 		
 	}	
 
