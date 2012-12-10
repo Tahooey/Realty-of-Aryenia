@@ -68,6 +68,16 @@ public class MapBuilder {
 						LowerBLOCKS[j][i]=new Air();
 					}else if(Engine.fh.INTSlay1[i][j]==2){
 						LowerBLOCKS[j][i]=new StoneTile();
+					}else if(Engine.fh.INTSlay1[i][j]==3){
+						LowerBLOCKS[j][i]=new Brick();
+					}else if(Engine.fh.INTSlay1[i][j]==4){
+						LowerBLOCKS[j][i]=new Pillow();
+					}else if(Engine.fh.INTSlay1[i][j]==5){
+						LowerBLOCKS[j][i]=new Blanket();
+					}else if(Engine.fh.INTSlay1[i][j]==6){
+						LowerBLOCKS[j][i]=new MossyStoneTile();
+					}else{
+						LowerBLOCKS[j][i]=new YellowFlower();
 					}
 				}
 			}
@@ -81,6 +91,16 @@ public class MapBuilder {
 						HigherBLOCKS[j][i]=new Air();
 					}else if(Engine.fh.INTSlay2[i][j]==2){
 						HigherBLOCKS[j][i]=new StoneTile();
+					}else if(Engine.fh.INTSlay2[i][j]==3){
+						HigherBLOCKS[j][i]=new Brick();
+					}else if(Engine.fh.INTSlay2[i][j]==4){
+						HigherBLOCKS[j][i]=new Pillow();
+					}else if(Engine.fh.INTSlay2[i][j]==5){
+						HigherBLOCKS[j][i]=new Blanket();
+					}else if(Engine.fh.INTSlay2[i][j]==6){
+						HigherBLOCKS[j][i]=new MossyStoneTile();
+					}else {
+						HigherBLOCKS[j][i]=new YellowFlower();
 					}
 				}
 			}
