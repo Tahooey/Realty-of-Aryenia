@@ -15,9 +15,11 @@ public class Entity {
 	public static boolean canStartAI=false;
 	
 	public String mobName;
-	
+	public boolean canFire=false;
 	public String name;
-	
+	public int AmmoMax=16;
+	public int AmmoCur=0;
+	public Projectile[] PROJECTILES;
 	public boolean changingX=false,changingY=false;
 	Random r = new Random();
 	public int dx=0,dy=0;
@@ -43,7 +45,15 @@ public class Entity {
 	public Tile t = new Tile();
 	
 	public Entity(){
-		
+		PROJECTILES = new Projectile[AmmoMax];
+		reloadAmmo();
+	}
+	
+	public void reloadAmmo(){
+		for(int i=0;i<PROJECTILES.length;i++){
+			PROJECTILES[i]=new Projectile();
+		}
+		AmmoCur=0;
 	}
 	
 	public void runEntity(Graphics g){
@@ -55,8 +65,28 @@ public class Entity {
 		if(!isControlledByPlayer){
 			if(canStartAI){
 				runAI();
-			}			
+			}
 		}
+		for(int i=0;i<PROJECTILES.length;i++){
+			if(PROJECTILES[i].canFire){
+				PROJECTILES[i].drawProjectile(g);
+			}
+		}
+		
+	}
+	
+	public void FireProjectile(int direction){
+		PROJECTILES[AmmoCur].dir=direction;
+		PROJECTILES[AmmoCur].x=x;
+		PROJECTILES[AmmoCur].y=y;
+		PROJECTILES[AmmoCur].xOffset=xoffset;
+		PROJECTILES[AmmoCur].yOffset=yoffset;
+		PROJECTILES[AmmoCur].workInts();
+		PROJECTILES[AmmoCur].canFire=true;
+		if(AmmoCur<PROJECTILES.length-1){
+			AmmoCur+=1;
+		}
+		
 	}
 	
 	public void runAI(){
