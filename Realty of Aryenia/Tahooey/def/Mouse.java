@@ -36,11 +36,11 @@ public class Mouse {
 				if(blockToChange>=1){
 					blockToChange--;
 				}else{
-					blockToChange=3;
+					blockToChange=7;
 				}
 			}
 			if(KeyCode==KeyEvent.VK_2){
-				if(blockToChange<=3){
+				if(blockToChange<=7){
 					blockToChange++;;
 				}else{
 					blockToChange=1;
@@ -63,8 +63,16 @@ public class Mouse {
 								Engine.mb.HigherBLOCKS[i][j]=new Grass();
 							}else if(blockToChange==3){
 								Engine.mb.HigherBLOCKS[i][j]=new StoneTile();
+							}else if(blockToChange==4){
+								Engine.mb.HigherBLOCKS[i][j]=new Brick();
+							}else if(blockToChange==5){
+								Engine.mb.HigherBLOCKS[i][j]=new Pillow();
+							}else if(blockToChange==6){
+								Engine.mb.HigherBLOCKS[i][j]=new Blanket();
+							}else if(blockToChange==7){
+								Engine.mb.HigherBLOCKS[i][j]=new MossyStoneTile();
 							}else{
-								Engine.mb.HigherBLOCKS[i][j]=new Air();
+								Engine.mb.HigherBLOCKS[i][j]=new YellowFlower();
 							}
 						}
 					}else{
@@ -81,8 +89,16 @@ public class Mouse {
 								Engine.mb.LowerBLOCKS[i][j]=new Grass();
 							}else if(blockToChange==3){
 								Engine.mb.LowerBLOCKS[i][j]=new StoneTile();
+							}else if(blockToChange==4){
+								Engine.mb.LowerBLOCKS[i][j]=new Brick();
+							}else if(blockToChange==5){
+								Engine.mb.LowerBLOCKS[i][j]=new Pillow();
+							}else if(blockToChange==6){
+								Engine.mb.LowerBLOCKS[i][j]=new Blanket();
+							}else if(blockToChange==7){
+								Engine.mb.LowerBLOCKS[i][j]=new MossyStoneTile();
 							}else{
-								Engine.mb.LowerBLOCKS[i][j]=new Air();
+								Engine.mb.LowerBLOCKS[i][j]=new YellowFlower();
 							}
 						}
 					}else{
