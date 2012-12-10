@@ -53,7 +53,21 @@ public class Engine {
 					if(KeyCode==KeyEvent.VK_D){
 						mb.ENTITIES[i].move(Entity.RIGHT);
 						canPressKey=false;
-					}						
+					}
+					if(!inEditMode){
+						if(KeyCode==KeyEvent.VK_UP){
+							mb.ENTITIES[i].FireProjectile(Projectile.UP);
+						}
+						if(KeyCode==KeyEvent.VK_DOWN){
+							mb.ENTITIES[i].FireProjectile(Projectile.DOWN);
+						}
+						if(KeyCode==KeyEvent.VK_LEFT){
+							mb.ENTITIES[i].FireProjectile(Projectile.LEFT);
+						}
+						if(KeyCode==KeyEvent.VK_RIGHT){
+							mb.ENTITIES[i].FireProjectile(Projectile.RIGHT);
+						}
+					}
 				}
 			}
 		}
@@ -66,10 +80,15 @@ public class Engine {
 			}
 		}
 		if(KeyCode==KeyEvent.VK_UP){
-			Mouse.curlayer=2;
+			if(inEditMode){
+				Mouse.curlayer=2;
+			}		
 		}
 		if(KeyCode==KeyEvent.VK_DOWN){
-			Mouse.curlayer=1;
+			if(inEditMode){
+				Mouse.curlayer=1;
+			}
+			
 		}
 		if(KeyCode==KeyEvent.VK_E){
 			inEditMode=true;
