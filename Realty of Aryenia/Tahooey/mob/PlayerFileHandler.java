@@ -60,7 +60,7 @@ public class PlayerFileHandler {
 	public void WriteStartPlayerData() throws IOException{
 		fw.write("Player\r\n");
 		fw.write("24 24\r\n");
-		fw.write("0 0\r\n");
+		fw.write("416 376\r\n");
 		fw.write("100 100\r\n");
 		fw.write("Player");
 		
