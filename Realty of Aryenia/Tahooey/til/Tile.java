@@ -15,7 +15,7 @@ public class Tile {
 	public void runTile(Graphics g){
 		r.setSize(w,h);
 		r.setLocation(x,y);
-		//g.drawRect(r.x, r.y, r.width, r.height);
+		g.drawRect(r.x, r.y, r.width, r.height);
 	}
 	public boolean isIntersecting(Rectangle r){
 		return this.r.intersects(r);
