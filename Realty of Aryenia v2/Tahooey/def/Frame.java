@@ -8,7 +8,7 @@ import javax.swing.*;
 
 import fil.ImageFileHandler;
 
-public class Frame extends JFrame implements KeyListener {
+public class Frame extends JFrame implements KeyListener, MouseListener, MouseMotionListener {
 	private static final long serialVersionUID = 1L;
 	Image dbImage;
 	Graphics dbg;
@@ -35,6 +35,11 @@ public class Frame extends JFrame implements KeyListener {
 		
 		//Listeners
 		addKeyListener(this);
+		addMouseListener(this);
+		addMouseMotionListener(this);
+		
+		//Initialise
+		Engine.Initialise();
 		
 		setVisible(true);
 	}	
@@ -65,6 +70,42 @@ public class Frame extends JFrame implements KeyListener {
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		Engine.MousePressed(arg0);
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		Engine.MouseReleased(arg0);
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		Engine.MouseMoved(arg0);
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
+		Engine.MouseMoved(arg0);
 	}
 
 }
