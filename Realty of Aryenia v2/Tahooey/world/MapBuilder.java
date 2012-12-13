@@ -9,7 +9,7 @@ public class MapBuilder {
 	
 	public Block[][][] BLOCKS;
 	public Mob[] MOBS; 
-	int[][][] ID;
+	public int[][][] ID;
 	
 	public MapBuilder(){
 		MOBS=new Mob[1];
