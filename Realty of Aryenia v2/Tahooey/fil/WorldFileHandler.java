@@ -3,6 +3,8 @@ package fil;
 import java.io.*;
 import java.util.*;
 
+import def.Engine;
+
 public class WorldFileHandler {
 	
 	File world;
@@ -10,7 +12,7 @@ public class WorldFileHandler {
 	Scanner ws;
 	
 	public int[][][] WrittenBlockID;
-	public int WrittenWorldW=16, WrittenWorldH=16,WrittenWorldLayers=4;
+	public int WrittenWorldW=64, WrittenWorldH=64,WrittenWorldLayers=8;
 	public String WrittenWorldName="test";
 	
 	public int[][][]ReadBlockID;
@@ -64,7 +66,7 @@ public class WorldFileHandler {
 		for(int l=0;l<WrittenBlockID.length;l++){
 			for(int h=0;h<WrittenBlockID[l].length;h++){
 				for(int w=0;w<WrittenBlockID[l][h].length;w++){
-					if(l%2==0){
+					if(l==0){
 						WrittenBlockID[l][h][w]=1;					
 					}else{
 						if(h==0){
@@ -82,6 +84,26 @@ public class WorldFileHandler {
 				}
 			}
 		}
+	}
+	
+	public void SaveWorld() throws IOException{
+		fw=new FileWriter(world);
+		fw.write(ReadWorldName+"\r\n");
+		fw.write(ReadWorldW+"\r\n");
+		fw.write(ReadWorldH+"\r\n");
+		fw.write(ReadWorldLayers+"\r\n");
+		for(int l=0;l<Engine.mb.BLOCKS.length;l++){
+			for(int h=0;h<Engine.mb.BLOCKS[l].length;h++){
+				for(int w=0;w<Engine.mb.BLOCKS[l][h].length;w++){
+					fw.write(Engine.mb.BLOCKS[l][h][w].ID+" ");
+				}
+				fw.write("\r\n");
+			}
+			fw.write("\r\n");
+		}
+		
+		fw.flush();
+		fw.close();
 	}
 	
 	public void WriteWorld() throws IOException{
