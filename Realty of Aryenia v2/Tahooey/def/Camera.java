@@ -10,6 +10,8 @@ public class Camera {
 	}
 	
 	public void RunCam(){
+		x=(Engine.mb.MOBS[0].finalx*-1)+500;
+		y=(Engine.mb.MOBS[0].finaly*-1)+200;
 		x=x+dx;
 		y=y+dy;
 	}
