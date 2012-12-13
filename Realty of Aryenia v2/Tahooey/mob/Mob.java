@@ -13,6 +13,8 @@ public class Mob {
 	public Image IMG_TO_DRAW;
 	public int Layer;
 	
+	public int direction;
+	
 	public int ID;
 	
 	public int dx=0,dy=0;	
@@ -21,7 +23,7 @@ public class Mob {
 	public boolean isControlledByPlayer=false;
 	
 	public Rectangle up,down,left,right;
-	public boolean canMoveLeft=true,canMoveRight=true,canMoveUp=true,canMoveDown=true;
+	public boolean GoingLeft=false,GoingRight=false,GoingUp=false,GoingDown=false;
 	
 	public Mob(){
 		up=new Rectangle();
@@ -64,59 +66,44 @@ public class Mob {
 	}
 	
 	public void setRectangles(){
-		up.setSize(finalw-2, 1);
-		down.setSize(finalw-2, 1);
-		left.setSize(1, finalh-2);
-		right.setSize(1, finalh-2);
+		up.setSize(finalw, def.Frame.SPEED);
+		down.setSize(finalw, def.Frame.SPEED);
+		left.setSize(def.Frame.SPEED, finalh);
+		right.setSize(def.Frame.SPEED, finalh);
 		
-		up.setLocation(finalx+Engine.cam.x, (finaly+Engine.cam.y)-1);
-		down.setLocation(finalx+Engine.cam.x, (finaly+finalh+Engine.cam.y)+1);
-		left.setLocation(finalx+Engine.cam.x-1, finaly+Engine.cam.y);
-		right.setLocation(finalx+finalw+Engine.cam.x+1, finaly+Engine.cam.y);
+		up.setLocation(finalx+Engine.cam.x, (finaly+Engine.cam.y)-def.Frame.SPEED);
+		down.setLocation(finalx+Engine.cam.x, (finaly+finalh+Engine.cam.y));
+		left.setLocation(finalx+Engine.cam.x-def.Frame.SPEED, finaly+Engine.cam.y);
+		right.setLocation(finalx+finalw+Engine.cam.x, finaly+Engine.cam.y);
 		
 	}
 	
 	public void move(int dir){
+		direction=dir;
 		setImage(dir);
 		if(dir==def.Frame.UP){
-			if(canMoveUp){
-				canMoveDown=true;
-				dy=-def.Frame.SPEED;
-				dx=0;
-			}else{
-				dx=0;
-				dy=0;
-			}
+			GoingUp=true;
+			GoingDown=false;
+			dy=-def.Frame.SPEED;
+			dx=0;
 		}
 		if(dir==def.Frame.DOWN){
-			if(canMoveDown){
-				canMoveUp=true;
-				dy=def.Frame.SPEED;
-				dx=0;
-			}else{
-				dx=0;
-				dy=0;
-			}
+			GoingDown=true;
+			GoingUp=false;
+			dy=def.Frame.SPEED;
+			dx=0;
 		}
 		if(dir==def.Frame.LEFT){
-			if(canMoveLeft){
-				canMoveRight=true;
-				dx=-def.Frame.SPEED;
-				dy=0;
-			}else{
-				dy=0;
-				dx=0;
-			}
+			GoingLeft=true;
+			GoingRight=false;
+			dx=-def.Frame.SPEED;
+			dy=0;
 		}
 		if(dir==def.Frame.RIGHT){
-			if(canMoveRight){
-				canMoveLeft=true;
-				dx=def.Frame.SPEED;
-				dy=0;
-			}else{
-				dy=0;
-				dx=0;
-			}
+			GoingRight=true;
+			GoingLeft=false;
+			dx=def.Frame.SPEED;
+			dy=0;
 		}
 		if(dir==def.Frame.STILL){
 			dx=0;
@@ -140,8 +127,6 @@ public class Mob {
 	}
 	
 	public void drawMob(Graphics g){
-		g.fillRect(up.x,up.y,up.width,up.height);
-		g.fillRect(down.x,down.y,down.width,down.height);
 		g.drawImage(IMG_TO_DRAW,finalx+Engine.cam.x,finaly+Engine.cam.y,finalx+finalw+Engine.cam.x,finaly+finalh+Engine.cam.y,imgx,imgy,imgx2,imgy2,null);
 	}
 
