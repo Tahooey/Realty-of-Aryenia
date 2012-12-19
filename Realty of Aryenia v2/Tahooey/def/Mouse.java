@@ -1,12 +1,11 @@
 package def;
 
 import java.awt.Rectangle;
-import blcks.*;
 
 public class Mouse {
 	
 	static int blockToChangeTo=0;
-	static int maxBlock=3;
+	static int maxBlock=10;
 	
 	static int layer;
 	static Rectangle r;

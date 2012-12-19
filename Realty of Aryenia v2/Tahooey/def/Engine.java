@@ -53,7 +53,10 @@ public class Engine {
 		if(KeyCode==KeyEvent.VK_D){
 			mb.MOBS[0].move(Frame.RIGHT);
 		}
-		if(KeyCode==KeyEvent.VK_UP){
+		if(KeyCode==KeyEvent.VK_O){
+			SoundFileHandler.sound1.stop();
+		}
+		/**if(KeyCode==KeyEvent.VK_UP){
 			if(mb.MOBS[0].Layer<Engine.mb.BLOCKS.length-1){
 				mb.MOBS[0].Layer+=1;
 			}else{
@@ -66,7 +69,7 @@ public class Engine {
 			}else{
 				mb.MOBS[0].Layer=0+1;
 			}
-		}
+		}**/
 		if(KeyCode==KeyEvent.VK_RIGHT){
 			if(Mouse.blockToChangeTo<Mouse.maxBlock){
 				Mouse.blockToChangeTo+=1;

@@ -49,8 +49,20 @@ public class MapBuilder {
 						BLOCKS[l][h][w]=new StoneBrick();
 					}else if(ID[l][h][w]==3){
 						BLOCKS[l][h][w]=new Bricks();						
-					}else{
-						System.out.println("ERROR");
+					}else if(ID[l][h][w]==4){
+						BLOCKS[l][h][w]=new WoodStairs(l+1,l+2,Block.UP);
+					}else if(ID[l][h][w]==5){
+						BLOCKS[l][h][w]=new WoodStairs(l+1,l+2,Block.DOWN);
+					}else if(ID[l][h][w]==6){
+						BLOCKS[l][h][w]=new WoodStairs(l+1,l+2,Block.LEFT);
+					}else if(ID[l][h][w]==7){
+						BLOCKS[l][h][w]=new WoodStairs(l+1,l+2,Block.RIGHT);
+					}else if(ID[l][h][w]==8){
+						BLOCKS[l][h][w]=new MossyStoneBrick();
+					}else if(ID[l][h][w]==9){
+						BLOCKS[l][h][w]=new Wood();
+					}else if(ID[l][h][w]==10){
+						BLOCKS[l][h][w]=new Stone();
 					}
 					BLOCKS[l][h][w].l=l+1;
 					BLOCKS[l][h][w].x=w*Block.w;

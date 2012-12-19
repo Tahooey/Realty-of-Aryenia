@@ -7,6 +7,7 @@ import java.io.*;
 import javax.swing.*;
 
 import fil.ImageFileHandler;
+import fil.SoundFileHandler;
 
 public class Frame extends JFrame implements KeyListener, MouseListener, MouseMotionListener {
 	private static final long serialVersionUID = 1L;
@@ -29,6 +30,7 @@ public class Frame extends JFrame implements KeyListener, MouseListener, MouseMo
 		//IO
 		try {
 			ImageFileHandler.loadImages();
+			SoundFileHandler.load();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -40,6 +42,7 @@ public class Frame extends JFrame implements KeyListener, MouseListener, MouseMo
 		
 		//Initialise
 		Engine.Initialise();
+		SoundFileHandler.sound1.loop();
 		
 		setVisible(true);
 	}	

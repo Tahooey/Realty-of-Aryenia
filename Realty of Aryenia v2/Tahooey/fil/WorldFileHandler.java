@@ -12,7 +12,7 @@ public class WorldFileHandler {
 	Scanner ws;
 	
 	public int[][][] WrittenBlockID;
-	public int WrittenWorldW=64, WrittenWorldH=64,WrittenWorldLayers=8;
+	public int WrittenWorldW=64, WrittenWorldH=64,WrittenWorldLayers=16;
 	public String WrittenWorldName="test";
 	
 	public int[][][]ReadBlockID;
@@ -25,6 +25,7 @@ public class WorldFileHandler {
 		if(!world.exists()){
 			WrittenBlockID=new int[WrittenWorldLayers][WrittenWorldH][WrittenWorldW];
 			try {
+				//world.mkdir();
 				world.createNewFile();
 				fw=new FileWriter(world);
 				GenerateTiles();
