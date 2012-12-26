@@ -36,9 +36,8 @@ public class Block {
 		upper=new Rectangle();
 	}
 	
-	public void RunBlock(Graphics g){
+	public void RunBlock(){
 		workInts();
-		drawBlock(g);
 		setRectangle();
 		pushMob();
 		if(ChangesLayer){
@@ -148,9 +147,6 @@ public class Block {
 						if(l==Engine.mb.MOBS[0].Layer){
 							IMG_TO_DRAW=ImageFileHandler.TerrainHigher;
 							g.drawImage(IMG_TO_DRAW,finalx+Engine.cam.x,finaly+Engine.cam.y,finalx+finalw+Engine.cam.x,finaly+finalh+Engine.cam.y,imgx,imgy,imgx2,imgy2,null);
-							if(ChangesLayer){
-								g.fillRect(upper.x, upper.y, upper.width, upper.height);
-							}
 						}
 						if(l==Engine.mb.MOBS[0].Layer-1){
 							isIntersectedByMouse=false;
@@ -158,9 +154,6 @@ public class Block {
 						if(l==Engine.mb.MOBS[0].Layer-1){
 							IMG_TO_DRAW=ImageFileHandler.TerrainLower;
 							g.drawImage(IMG_TO_DRAW,finalx+Engine.cam.x,finaly+Engine.cam.y,finalx+finalw+Engine.cam.x,finaly+finalh+Engine.cam.y,imgx,imgy,imgx2,imgy2,null);
-						}			
-						if(ChangesLayer){
-							g.fillRect(upper.x, upper.y, upper.width, upper.height);
 						}
 					}
 				}

@@ -134,14 +134,13 @@ public class Mob {
 		}
 	}
 	
-	public void runMob(Graphics g){
+	public void runMob(){
 		if(finalx+Engine.cam.x>=0-finalw){
 			if(finalx+Engine.cam.x<=def.Frame.WIDTH){
 				if(finaly+Engine.cam.y>=0-finalh){
 					if(finaly+Engine.cam.y<=def.Frame.HEIGHT){
 						finalx=finalx+dx;
 						finaly=finaly+dy;
-						drawMob(g);
 						setRectangles();
 					}
 				}
@@ -150,7 +149,15 @@ public class Mob {
 	}
 	
 	public void drawMob(Graphics g){
+		if(finalx+Engine.cam.x>=0-finalw){
+			if(finalx+Engine.cam.x<=def.Frame.WIDTH){
+				if(finaly+Engine.cam.y>=0-finalh){
+					if(finaly+Engine.cam.y<=def.Frame.HEIGHT){
 		g.drawImage(IMG_TO_DRAW,finalx+Engine.cam.x,finaly+Engine.cam.y,finalx+finalw+Engine.cam.x,finaly+finalh+Engine.cam.y,imgx,imgy,imgx2,imgy2,null);
+					}
+				}
+			}
+		}
 	}
 
 }

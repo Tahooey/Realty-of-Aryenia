@@ -18,10 +18,43 @@ public class Mouse {
 	}
 	
 	public static void Update(){
-		layer=Engine.mb.MOBS[0].Layer;
 		r.setLocation(X,Y);
-		HighLightTile();
+		//if(!intrfce.Menu.runMenu){
+		layer=Engine.mb.MOBS[0].Layer;
 		ChangeTile();
+		//}
+		comButtons();
+	}
+	
+	public static void comButtons(){
+		for(int i=0;i<intrfce.Menu.BUTTONS.length;i++){
+			if(r.intersects(intrfce.Menu.BUTTONS[i].r)){
+				if(isPressed){
+					intrfce.Menu.BUTTONS[i].isClicked=true;
+					intrfce.Menu.BUTTONS[i].isHoveredOver=false;
+				}else{
+					intrfce.Menu.BUTTONS[i].isClicked=false;
+					intrfce.Menu.BUTTONS[i].isHoveredOver=true;
+				}
+			}else{
+				intrfce.Menu.BUTTONS[i].isClicked=false;
+				intrfce.Menu.BUTTONS[i].isHoveredOver=false;
+			}
+		}
+		for(int i=0;i<intrfce.Menu.TEXTBOXES.length;i++){
+			if(r.intersects(intrfce.Menu.TEXTBOXES[i].b.r)){
+				if(isPressed){
+					intrfce.Menu.TEXTBOXES[i].b.isClicked=true;
+					intrfce.Menu.TEXTBOXES[i].b.isHoveredOver=false;
+				}else{
+					intrfce.Menu.TEXTBOXES[i].b.isClicked=false;
+					intrfce.Menu.TEXTBOXES[i].b.isHoveredOver=true;
+				}
+			}else{
+				intrfce.Menu.TEXTBOXES[i].b.isClicked=false;
+				intrfce.Menu.TEXTBOXES[i].b.isHoveredOver=false;
+			}
+		}
 	}
 	
 	public static void HighLightTile(){

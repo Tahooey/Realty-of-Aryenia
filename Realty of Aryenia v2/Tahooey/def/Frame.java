@@ -6,6 +6,7 @@ import java.io.*;
 
 import javax.swing.*;
 
+import fil.FontFileHandler;
 import fil.ImageFileHandler;
 import fil.SoundFileHandler;
 
@@ -13,13 +14,14 @@ public class Frame extends JFrame implements KeyListener, MouseListener, MouseMo
 	private static final long serialVersionUID = 1L;
 	Image dbImage;
 	Graphics dbg;
-	public static final int SPEED=8;
+	public static int SPEED;
 	public static final int UP=1,DOWN=2,LEFT=3,RIGHT=4,STILL=5;
 	public static  final int SCALE=8;
 	public static final int WIDTH=1028,HEIGHT=576;
 	public static final String TITLE="Realty of Aryenia";
 	
 	public Frame(){
+		SPEED=1*SCALE;
 		setSize(WIDTH,HEIGHT);
 		setLocationRelativeTo(null);
 		setTitle(TITLE);
@@ -31,7 +33,10 @@ public class Frame extends JFrame implements KeyListener, MouseListener, MouseMo
 		try {
 			ImageFileHandler.loadImages();
 			SoundFileHandler.load();
+			FontFileHandler.loadFont();
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (FontFormatException e) {
 			e.printStackTrace();
 		}
 		
@@ -45,11 +50,31 @@ public class Frame extends JFrame implements KeyListener, MouseListener, MouseMo
 		SoundFileHandler.sound1.loop();
 		
 		setVisible(true);
-	}	
+	}
+	
+	Thread BlockRunner = new Thread(){
+		public void run(){
+			Engine.wr.RunBlocks();
+		}
+	};
+	Thread MobRunner = new Thread(){
+		public void run(){
+			Engine.wr.RunMobs();
+			Engine.cam.RunCam();
+		}
+	};
+	Thread MouseUpdater = new Thread(){
+		public void run(){
+			Mouse.Update();
+		}
+	};
 	
 	public void paintComponent(Graphics g){
-		Engine.RunGame(g);
-		
+		intrfce.Menu.runMenu(g);
+		Engine.wr.RunWorld(g);
+		MouseUpdater.run();
+		BlockRunner.run();
+		MobRunner.run();
 		repaint();
 	}
 	

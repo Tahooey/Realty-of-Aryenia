@@ -9,6 +9,8 @@ import fil.*;
 
 public class Engine {
 	
+	public static boolean gameIsRunning=false;
+	
 	public static WorldFileHandler wfh = new WorldFileHandler("test");
 	public static PlayerFileHandler pfh = new PlayerFileHandler("test");
 	public static MapBuilder mb = new MapBuilder();
@@ -16,13 +18,15 @@ public class Engine {
 	public static Camera cam = new Camera();
 	
 	public static void RunGame(Graphics g){
-		wr.RunWorld(g);
-		cam.RunCam();
-		Mouse.Update();
+		//if(!gameIsRunning){
+			//intrfce.Menu.runMenu(g);
+		//}else{
+			wr.RunWorld(g);
+		//}
 	}
-	
 	public static void Initialise(){
 		Mouse.Init();
+		intrfce.Menu.Init();
 	}
 	
 	public static void MousePressed(MouseEvent e){
@@ -41,20 +45,25 @@ public class Engine {
 	
 	public static void KeyPressed(KeyEvent e){
 		int KeyCode=e.getKeyCode();
-		if(KeyCode==KeyEvent.VK_W){
-			mb.MOBS[0].move(Frame.UP);
-		}
-		if(KeyCode==KeyEvent.VK_S){
-			mb.MOBS[0].move(Frame.DOWN);
-		}
-		if(KeyCode==KeyEvent.VK_A){
-			mb.MOBS[0].move(Frame.LEFT);
-		}
-		if(KeyCode==KeyEvent.VK_D){
-			mb.MOBS[0].move(Frame.RIGHT);
-		}
+		//if(intrfce.Menu.runMenu==false){
+			if(KeyCode==KeyEvent.VK_W){
+				mb.MOBS[0].move(Frame.UP);
+			}
+			if(KeyCode==KeyEvent.VK_S){
+				mb.MOBS[0].move(Frame.DOWN);
+			}
+			if(KeyCode==KeyEvent.VK_A){
+				mb.MOBS[0].move(Frame.LEFT);
+			}
+			if(KeyCode==KeyEvent.VK_D){
+				mb.MOBS[0].move(Frame.RIGHT);
+			}
+		//}
 		if(KeyCode==KeyEvent.VK_O){
 			SoundFileHandler.sound1.stop();
+		}
+		if(KeyCode==KeyEvent.VK_ESCAPE){
+			//intrfce.Menu.runMenu=true;
 		}
 		/**if(KeyCode==KeyEvent.VK_UP){
 			if(mb.MOBS[0].Layer<Engine.mb.BLOCKS.length-1){
@@ -80,14 +89,16 @@ public class Engine {
 			Mouse.blockToChangeTo-=1;
 			}
 		}
-		if(KeyCode==KeyEvent.VK_P){
-			try {
-				wfh.SaveWorld();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+	}
+	
+	public static void save(){
+		try {
+			wfh.SaveWorld();
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
 	}
+	
 	public static void KeyReleased(KeyEvent e){
 		int KeyCode=e.getKeyCode();
 		if(KeyCode==KeyEvent.VK_W){

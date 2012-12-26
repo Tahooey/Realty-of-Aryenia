@@ -8,6 +8,7 @@ import def.Engine;
 public class WorldFileHandler {
 	
 	File world;
+	File dir;
 	FileWriter fw;
 	Scanner ws;
 	
@@ -20,12 +21,13 @@ public class WorldFileHandler {
 	public String ReadWorldName;
 	
 	public WorldFileHandler(String WorldName){
-		world = new File("res/"+WorldName+"/map.thu");
+		dir= new File("res/worlds/"+WorldName);
+		world = new File("res/worlds/"+WorldName+"/map.thu");
 		//System.out.println("Hi");
 		if(!world.exists()){
 			WrittenBlockID=new int[WrittenWorldLayers][WrittenWorldH][WrittenWorldW];
 			try {
-				//world.mkdir();
+				dir.mkdir();
 				world.createNewFile();
 				fw=new FileWriter(world);
 				GenerateTiles();

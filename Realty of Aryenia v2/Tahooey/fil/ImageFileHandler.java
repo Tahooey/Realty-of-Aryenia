@@ -12,6 +12,9 @@ public class ImageFileHandler {
 	public static BufferedImage TerrainLower;
 	public static BufferedImage Sleeper;
 	public static BufferedImage Wizard;
+	public static BufferedImage Buttons;
+	public static BufferedImage Menu;
+	public static BufferedImage TextBox;
 	
 	static ImageFileHandler loader=new ImageFileHandler();
 	
@@ -20,6 +23,9 @@ public class ImageFileHandler {
 		TerrainLower=loadImage("terrainLower.png");
 		Sleeper=loadImage("mob0.png");
 		Wizard=loadImage("mob1.png");
+		Buttons=loadImage("buttons.png");
+		Menu=loadImage("menu.png");
+		TextBox=loadImage("txtbox.png");
 	}
 	
 

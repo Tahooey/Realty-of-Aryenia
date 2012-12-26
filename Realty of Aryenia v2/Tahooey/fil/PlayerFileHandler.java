@@ -17,7 +17,7 @@ public class PlayerFileHandler {
 	public int ReadPlayerX,ReadPlayerY;
 	public int ReadPlayerType,ReadPlayerLayer;
 	public PlayerFileHandler(String map){
-		pf=new File("res/"+map+"/player.thu");
+		pf=new File("res/worlds/"+map+"/player.thu");
 		if(!pf.exists()){
 			try {
 				pf.createNewFile();
