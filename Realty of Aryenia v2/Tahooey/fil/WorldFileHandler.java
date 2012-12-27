@@ -13,7 +13,7 @@ public class WorldFileHandler {
 	Scanner ws;
 	
 	public int[][][] WrittenBlockID;
-	public int WrittenWorldW=64, WrittenWorldH=64,WrittenWorldLayers=16;
+	public int WrittenWorldW=64, WrittenWorldH=64,WrittenWorldLayers=8;
 	public String WrittenWorldName="test";
 	
 	public int[][][]ReadBlockID;
