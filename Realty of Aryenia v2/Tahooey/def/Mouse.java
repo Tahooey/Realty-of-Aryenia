@@ -19,10 +19,8 @@ public class Mouse {
 	
 	public static void Update(){
 		r.setLocation(X,Y);
-		//if(!intrfce.Menu.runMenu){
 		layer=Engine.mb.MOBS[0].Layer;
 		ChangeTile();
-		//}
 		comButtons();
 	}
 	
@@ -70,16 +68,18 @@ public class Mouse {
 	}
 	
 	public static void ChangeTile(){
-		for(int h=0;h<Engine.mb.BLOCKS[layer-1].length;h++){
-			for(int w=0;w<Engine.mb.BLOCKS[layer-1][h].length;w++){
-				if(r.intersects(Engine.mb.BLOCKS[layer-1][h][w].r)){
-					if(isPressed){
-							Engine.mb.ID[layer-1][h][w]=blockToChangeTo;
+		if(!intrfce.Menu.runMenu){
+			for(int h=0;h<Engine.mb.BLOCKS[layer-1].length;h++){
+				for(int w=0;w<Engine.mb.BLOCKS[layer-1][h].length;w++){
+					if(r.intersects(Engine.mb.BLOCKS[layer-1][h][w].r)){
+						if(isPressed){
+								Engine.mb.ID[layer-1][h][w]=blockToChangeTo;
+						}
 					}
 				}
 			}
+			Engine.mb.BuildBlocks();
 		}
-		Engine.mb.BuildBlocks();
 	}
 	
 	public static void setXY(int xco,int yco){
