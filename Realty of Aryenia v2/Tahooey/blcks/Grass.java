@@ -9,6 +9,8 @@ public class Grass extends Block {
 		imgy=0;
 		imgx2=8;
 		imgy2=8;
+		
+		name="Grass";
 	}
 
 }

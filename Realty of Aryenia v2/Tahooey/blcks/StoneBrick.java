@@ -8,6 +8,8 @@ public class StoneBrick extends Block{
 		imgy=0;
 		imgx2=16;
 		imgy2=8;
+		
+		name="Stone Brick";
 	}
 
 }

@@ -8,6 +8,9 @@ public class MossyStoneBrick extends Block {
 		imgy=0;
 		imgx2=64;
 		imgy2=8;
+		
+		name="Mossy Stone Brick";
+		
 	}
 
 }

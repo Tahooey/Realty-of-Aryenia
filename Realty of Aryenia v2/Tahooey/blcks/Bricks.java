@@ -9,6 +9,7 @@ public class Bricks extends Block {
 		imgy=0;
 		imgx2=24;
 		imgy2=8;
+		name="Bricks";
 	}
 
 }

@@ -8,6 +8,8 @@ public class Wood extends Block {
 		imgy=0;
 		imgx2=72;
 		imgy2=8;
+		
+		name="Wood";
 	}
 
 }
