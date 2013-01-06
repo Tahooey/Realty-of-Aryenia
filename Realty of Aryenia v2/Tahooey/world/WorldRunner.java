@@ -50,6 +50,9 @@ public class WorldRunner {
 				}
 			}
 		}
+		if(Engine.canUpdateMap){
+			Engine.updateMap();
+		}
 	}
 
 }
