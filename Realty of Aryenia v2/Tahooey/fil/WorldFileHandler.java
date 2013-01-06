@@ -7,43 +7,71 @@ import def.Engine;
 
 public class WorldFileHandler {
 	
+	File actionBlocks;
 	File world;
-	File dir;
+	File dir1;
+	File dir2;
 	FileWriter fw;
+	FileWriter ab;
 	Scanner ws;
+	Scanner abs;
 	
 	public int[][][] WrittenBlockID;
-	public int WrittenWorldW=64, WrittenWorldH=64,WrittenWorldLayers=8;
-	public String WrittenWorldName="test";
+	public int WrittenWorldW, WrittenWorldH,WrittenWorldLayers;
+	public String WrittenWorldName;
 	
 	public int[][][]ReadBlockID;
 	public int ReadWorldW, ReadWorldH,ReadWorldLayers;
 	public String ReadWorldName;
+	public int ReadActionBlocks;
 	
-	public WorldFileHandler(String WorldName){
-		dir= new File("res/worlds/"+WorldName);
-		world = new File("res/worlds/"+WorldName+"/map.thu");
+	public int[] ReadActionBlocksMapToChangeTo;
+	public int[] ReadActionBlocksPlayerX;
+	public int[] ReadActionBlocksPlayerY;
+	
+	public WorldFileHandler(String WorldName,int w,int h,int layers,String name){
+		WrittenWorldW=w;
+		WrittenWorldH=h;
+		WrittenWorldName=name;
+		WrittenWorldLayers=layers;
+		dir1= new File("res/worlds/"+WorldName);
+		dir2= new File("res/worlds/"+WorldName+"/"+name);
+		world = new File("res/worlds/"+WorldName+"/"+name+"/map.thu");
+		actionBlocks = new File("res/worlds/"+WorldName+"/"+name+"/actblks.thu");
 		//System.out.println("Hi");
 		if(!world.exists()){
 			WrittenBlockID=new int[WrittenWorldLayers][WrittenWorldH][WrittenWorldW];
 			try {
-				dir.mkdir();
+				dir1.mkdir();
+				dir2.mkdir();
 				world.createNewFile();
 				fw=new FileWriter(world);
+				
 				GenerateTiles();
 				WriteWorld();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}			
 		}
+		if(!actionBlocks.exists()){
+			try {
+				actionBlocks.createNewFile();
+				ab=new FileWriter(actionBlocks);
+				WriteActionBlocks();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		try {
 			ws=new Scanner(world);
+			abs = new Scanner(actionBlocks);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		
 		ReadInfo();
 		ReadBlockID=new int[ReadWorldLayers][ReadWorldH][ReadWorldW];
-		
+		ReadActionBlocks();
 		ReadWorld();
 	}
 	
@@ -63,6 +91,25 @@ public class WorldFileHandler {
 				
 			}
 		}
+	}
+	
+	public void ReadActionBlocks(){
+		ReadActionBlocks=abs.nextInt();
+		ReadActionBlocksMapToChangeTo=new int[ReadActionBlocks];
+		ReadActionBlocksPlayerX=new int[ReadActionBlocks];
+		ReadActionBlocksPlayerY=new int[ReadActionBlocks];
+		for(int i=0;i<ReadActionBlocksMapToChangeTo.length;i++){
+			ReadActionBlocksMapToChangeTo[i]=abs.nextInt();
+			ReadActionBlocksPlayerX[i]=abs.nextInt();
+			ReadActionBlocksPlayerY[i]=abs.nextInt();
+		}
+	}
+	
+	public void WriteActionBlocks() throws IOException{
+		ab.write("0");
+		
+		ab.flush();
+		ab.close();
 	}
 	
 	public void GenerateTiles(){
