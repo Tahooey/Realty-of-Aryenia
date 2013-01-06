@@ -5,6 +5,8 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+import fil.FontFileHandler;
+
 public class GamePanel extends JPanel implements Runnable {
 	private static final long serialVersionUID = 1L;
 
@@ -12,6 +14,8 @@ public class GamePanel extends JPanel implements Runnable {
 	private Graphics dbg;
 	static final int W = Frame.WIDTH, H = Frame.HEIGHT;
 	static final Dimension gameDim = new Dimension(W, H);
+	
+	public boolean blankScreen=false;
 
 	private Thread game;
 	private volatile boolean running = false;
@@ -99,6 +103,15 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public void draw(Graphics g) {
 		Engine.RunGame(g);
+		if(blankScreen){
+			g.setColor(Frame.BACKGROUND);
+			g.fillRect(0, 0, W, H);
+		}
+		if(Engine.editMode){
+			g.setColor(Color.WHITE);
+			g.setFont(FontFileHandler.Tahooey);
+			g.drawString(Mouse.currentBlock,20,20);
+		}
 	}
 
 	private void gameRender() {
