@@ -7,6 +7,12 @@ import fil.ImageFileHandler;
 
 public class Block {
 
+	public boolean isInvisible = false;
+	
+	public String name;
+	
+	public int mapChangerX,mapChangerY;
+
 	public boolean ChangesLayer = false;
 	public int LowerLayer, HigherLayer;
 	public boolean HasChangedLayer;
@@ -21,7 +27,12 @@ public class Block {
 	public static int finalw, finalh;
 	public boolean isCollidable = true;
 
+	public boolean ChangesMap = false;
+
 	public static final int UP = 1, DOWN = 2, LEFT = 3, RIGHT = 4;
+
+	public int directionOfChange;
+	public int mapToChangeTo;
 
 	public int directionOfSteps;
 	public Rectangle lower, upper;
@@ -33,17 +44,35 @@ public class Block {
 	}
 
 	public void setSteps(int dir) {
-		directionOfSteps = dir;
 		lower = new Rectangle();
 		upper = new Rectangle();
+		directionOfSteps = dir;
 	}
 
 	public void RunBlock() {
 		workInts();
 		setRectangle();
-		pushMob();
+		// pushMob();
 		if (ChangesLayer) {
 			ChangeLayers();
+		}
+		if (ChangesMap) {
+			ChangeMap();
+		}
+	}
+
+	public void setMapChanger() {
+		lower = new Rectangle();
+		upper = new Rectangle();
+	}
+
+	public void ChangeMap() {
+		if (Engine.mb.MOBS[0].Layer == l) {
+			if (Engine.mb.MOBS[0].forward.intersects(r)) {
+				Engine.changeMap(mapToChangeTo);
+				Engine.mb.MOBS[0].finalx=mapChangerX*finalw;
+				Engine.mb.MOBS[0].finaly=mapChangerY*finalh;
+			}
 		}
 	}
 
@@ -146,28 +175,40 @@ public class Block {
 
 	public void drawBlock(Graphics g) {
 		workInts();
-		if (finalx + Engine.cam.x >= -Block.finalw) {
-			if (finalx + Engine.cam.x <= def.Frame.WIDTH) {
-				if (finaly + Engine.cam.y >= -Block.finalh) {
-					if (finaly + Engine.cam.y <= def.Frame.HEIGHT) {
-						if (l == Engine.mb.MOBS[0].Layer) {
-							IMG_TO_DRAW = ImageFileHandler.TerrainHigher;
-							g.drawImage(IMG_TO_DRAW, finalx + Engine.cam.x,
-									finaly + Engine.cam.y, finalx + finalw
-											+ Engine.cam.x, finaly + finalh
-											+ Engine.cam.y, imgx, imgy, imgx2,
-									imgy2, null);
-						}
-						if (l == Engine.mb.MOBS[0].Layer - 1) {
-							isIntersectedByMouse = false;
-						}
-						if (l == Engine.mb.MOBS[0].Layer - 1) {
-							IMG_TO_DRAW = ImageFileHandler.TerrainLower;
-							g.drawImage(IMG_TO_DRAW, finalx + Engine.cam.x,
-									finaly + Engine.cam.y, finalx + finalw
-											+ Engine.cam.x, finaly + finalh
-											+ Engine.cam.y, imgx, imgy, imgx2,
-									imgy2, null);
+		if(ChangesMap){
+			if(Engine.editMode){
+				IMG_TO_DRAW = ImageFileHandler.TerrainHigher;
+				g.drawImage(IMG_TO_DRAW, finalx + Engine.cam.x,
+						finaly + Engine.cam.y, finalx + finalw
+								+ Engine.cam.x, finaly + finalh
+								+ Engine.cam.y, imgx, imgy,
+						imgx2, imgy2, null);
+			}
+		}
+		if (!isInvisible) {
+			if (finalx + Engine.cam.x >= -Block.finalw) {
+				if (finalx + Engine.cam.x <= def.Frame.WIDTH) {
+					if (finaly + Engine.cam.y >= -Block.finalh) {
+						if (finaly + Engine.cam.y <= def.Frame.HEIGHT) {
+							if (l == Engine.mb.MOBS[0].Layer) {
+								IMG_TO_DRAW = ImageFileHandler.TerrainHigher;
+								g.drawImage(IMG_TO_DRAW, finalx + Engine.cam.x,
+										finaly + Engine.cam.y, finalx + finalw
+												+ Engine.cam.x, finaly + finalh
+												+ Engine.cam.y, imgx, imgy,
+										imgx2, imgy2, null);
+							}
+							if (l == Engine.mb.MOBS[0].Layer - 1) {
+								isIntersectedByMouse = false;
+							}
+							if (l == Engine.mb.MOBS[0].Layer - 1) {
+								IMG_TO_DRAW = ImageFileHandler.TerrainLower;
+								g.drawImage(IMG_TO_DRAW, finalx + Engine.cam.x,
+										finaly + Engine.cam.y, finalx + finalw
+												+ Engine.cam.x, finaly + finalh
+												+ Engine.cam.y, imgx, imgy,
+										imgx2, imgy2, null);
+							}
 						}
 					}
 				}
