@@ -47,10 +47,14 @@ public class TextBox {
 				g.drawString("                  Left : a",x+(4*8),y+(6*8)+4);
 				g.drawString("                  Right : d",x+(4*8),y+(7*8)+6);
 				g.drawString("                  Turn Music Off : o",x+(4*8),y+(8*8)+8);
-				g.drawString("                  Toggle Blocks : Left",x+(4*8),y+(9*8)+10);
-				g.drawString("                   and Right Arrows",x+(4*8),y+(10*8)+12);
-				g.drawString("Goal: Defeat the Enemies (Soon)",x+(4*8),y+(14*8)+20);
-				g.drawString("and Don't die (Soon)",x+(4*8),y+(15*8)+22);
+				g.drawString("        EDIT MODE",x+(4*8),y+(9*8)+10);
+				g.drawString("                  Toggle Blocks : Left",x+(4*8),y+(10*8)+12);
+				g.drawString("                  and Right Arrows",x+(4*8),y+(11*8)+14);
+				g.drawString("                  Toggle Maps: 1 & 2",x+(4*8),y+(12*8)+16);
+				//g.drawString("                  Change Map Block",x+(4*8),y+(13*8)+18);
+				//g.drawString("                  Destination: 3 & 4",x+(4*8),y+(14*8)+20);
+				g.drawString("Goal: Defeat the Enemies (Soon)",x+(4*8),y+(19*8)+30);
+				g.drawString("and Don't die (Soon)",x+(4*8),y+(20*8)+32);
 			}else if(text.equals("CONTACT")){
 				g.drawString("Please report Bugs to me on",x+(4*8),y+(4*8)+2);
 				g.drawString("Twitter @Tahooey",x+(4*8),y+(5*8)+4);
