@@ -1,6 +1,6 @@
 package mob;
 
-import fil.ImageFileHandler;
+import fil.*;
 
 public class Wizard extends Mob{
 	
@@ -10,8 +10,12 @@ public class Wizard extends Mob{
 		y=yco;
 		ID=1;
 		Name=name;
+		inv.PType="Wizard";
+		inv.PName=Name;
 		IMG_TO_DRAW=ImageFileHandler.Wizard;
+		inv.PImage=IMG_TO_DRAW;
 		workFirstInts();
+		loadEmptyInventory();
 	}
 
 }
