@@ -19,7 +19,7 @@ public class Frame extends JFrame {
 	public static final int SCALE = 8;
 	public static final int WIDTH = 1028, HEIGHT = 576;
 	public static final String TITLE = "Realty of Aryenia";
-	GamePanel gp;
+	public static GamePanel gp;
 
 	public Frame() {
 
@@ -45,6 +45,8 @@ public class Frame extends JFrame {
 		} catch (FontFormatException e) {
 			e.printStackTrace();
 		}
+		
+		SoundFileHandler.sound1.loop();
 
 		Engine.Initialise();
 
